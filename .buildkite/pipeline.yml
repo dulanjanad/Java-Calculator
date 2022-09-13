@@ -5,7 +5,7 @@ steps:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
   - label: ":pipeline Compile:"
-    command: "mvn compile && echo Compiled Successfully !!"
+    command: "mvn compile"
   
   - label: ":pipeline: Build"
-    command: "mvn clean && mvn package && Built Successully !!"
+    command: "mvn clean && mvn package"
