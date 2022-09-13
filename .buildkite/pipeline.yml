@@ -4,7 +4,7 @@ steps:
     agents:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
-  - label: ":pipeline Compile:"
+  - label: ":pipeline: Compile"
     command: "mvn compile"
   
   - label: ":pipeline: Build"
