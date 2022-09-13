@@ -1,0 +1,5 @@
+name: "Java Example"
+description: "Java Project with Buildkite"
+steps:
+  - command: "buildkite-agent pipeline upload"
+    label: ":pipeline:"
