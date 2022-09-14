@@ -5,7 +5,7 @@ steps:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
   - label: ":pipeline: Set Vault Token"
-    command: echo "$BUILDKITE_VAULT"
+    command: 'curl --header "X-Vault-Token: $BUILDKITE_VAULT" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa'
     key: trigger-environment
   
   - label: ":pipeline: Compile"
