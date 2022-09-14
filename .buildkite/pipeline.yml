@@ -4,12 +4,12 @@ steps:
     agents:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
+  - label: ":pipeline: Set Vault Token"
+    command: scripts/trigger-environment.sh
+    key: trigger-environment
+  
   - label: ":pipeline: Compile"
     command: "mvn compile"
   
   - label: ":pipeline: Build"
     command: "mvn clean && mvn package"
-
-  - label: ":pipeline: Set Vault Token"
-    command: scripts/trigger-environment.sh
-    key: trigger-environment
