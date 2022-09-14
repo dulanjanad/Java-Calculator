@@ -5,7 +5,7 @@ steps:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
   - label: ":pipeline: Set Vault Token"
-    command: scripts/trigger-environment.sh
+    command: .buildkite/scripts/trigger-environment.sh
     key: trigger-environment
   
   - label: ":pipeline: Compile"
