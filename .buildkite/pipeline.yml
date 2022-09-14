@@ -11,5 +11,5 @@ steps:
     command: "mvn clean && mvn package"
 
   - label: ":pipeline: Set Vault Token"
-    command: scripts/trigger-environment
+    command: scripts/trigger-environment.sh
     key: trigger-environment
