@@ -5,11 +5,11 @@ steps:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
   - label: ":pipeline: Set Vault Token"
-    command: 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data" >> /var/lib/buildkite-agent/builds/instance-1-1/itelasoft/java-example/key.json'
+    command: 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data"'
     key: trigger-environment
   
-  - label: ":pipeline: Authenticate Gcloud"
-    command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=/var/lib/buildkite-agent/builds/instance-1-1/itelasoft/java-example/key.json"
+  #- label: ":pipeline: Authenticate Gcloud"
+  #  command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=/var/lib/buildkite-agent/builds/instance-1-1/itelasoft/java-example/key.json"
   
   - label: ":pipeline: Build"
     command: "mvn clean && mvn package"
