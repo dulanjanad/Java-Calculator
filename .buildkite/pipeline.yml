@@ -10,7 +10,7 @@ steps:
     key: trigger-environment
   
   - label: ":pipeline: Authenticate Gcloud"
-    command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=/var/lib/buildkite-agent/builds/instance-1-1/itelasoft/java-example/key.json"
+    command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=/buildkite/data/key.json"
   
   - label: ":pipeline: Build"
     command: "mvn clean && mvn package"
