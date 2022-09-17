@@ -4,14 +4,15 @@ steps:
     agents:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
-  - label: ":pipeline: Set Vault Token"
-    commands:
-      - cp /dev/null /buildkite/data/key.json
-      - 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data" >> /buildkite/data/key.json'
-    key: trigger-environment
+  #- label: ":pipeline: Set Vault Token"
+  #  commands:
+  #   - cp /dev/null /buildkite/data/key.json
+  #    - 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data" >> /buildkite/data/key.json'
+  #  key: trigger-environment
   
   - label: ":pipeline: Authenticate Gcloud"
-    command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=/buildkite/data/key.json"
+    command: 'gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file="\${GOOGLE_AUTH}"'
+    key: trigger-environment
   
   - label: ":rocket: List Artifacts"
     command: "gcloud artifacts repositories list"
