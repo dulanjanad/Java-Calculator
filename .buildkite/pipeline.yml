@@ -10,12 +10,17 @@ steps:
   #    - 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data" >> /buildkite/data/key.json'
   #  key: trigger-environment
   
-  - label: ":pipeline: Authenticate Gcloud"
+  - label: ":vault: Authenticate Gcloud"
     command: 'gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file="\${GOOGLE_APPLICATION_CREDENTIALS}"'
     key: trigger-environment
   
-  - label: ":rocket: List Artifacts"
+  - label: ":artifactory: List Artifacts"
     command: "gcloud artifacts repositories list"
   
-  - label: ":pipeline: Build"
+  - label: ":maven: Build"
     command: "mvn clean && mvn package"
+  
+  - label: ":lint-remover: Cleanup"
+    commands: 
+      - "rm -f /buildkite/data/key.json"
+      - gcloud auth revoke artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com
