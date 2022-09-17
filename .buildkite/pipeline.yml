@@ -5,11 +5,11 @@ steps:
       queue: "${BUILDKITE_AGENT_META_DATA_QUEUE:-default}"
   
   - label: ":pipeline: Set Vault Token"
-    command: 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data"'
+    command: 'curl --header "X-Vault-Token: \${BUILDKITE_VAULT}" --request GET http://34.87.227.119:8200/v1/kv/data/googlesa | jq ".data.data" >> key.json'
     key: trigger-environment
   
-  - label: ":pipeline: Compile"
-    command: "mvn compile"
+  - label: ":pipeline: Authenticate Gcloud"
+    command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=key.json"
   
   - label: ":pipeline: Build"
     command: "mvn clean && mvn package"
