@@ -11,7 +11,7 @@ steps:
   #  key: trigger-environment
   
   - label: ":pipeline: Authenticate Gcloud"
-    command: 'gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file="\${GOOGLE_AUTH}"'
+    command: 'gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file="\${GOOGLE_APPLICATION_CREDENTIALS}"'
     key: trigger-environment
   
   - label: ":rocket: List Artifacts"
