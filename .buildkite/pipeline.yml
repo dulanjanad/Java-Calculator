@@ -12,5 +12,8 @@ steps:
   - label: ":pipeline: Authenticate Gcloud"
     command: "gcloud auth activate-service-account artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com --key-file=/buildkite/data/key.json"
   
+  - label: ":rocket: List Artifacts"
+    command: "gcloud artifacts repositories list"
+  
   - label: ":pipeline: Build"
     command: "mvn clean && mvn package"
