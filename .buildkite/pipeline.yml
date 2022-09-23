@@ -22,5 +22,6 @@ steps:
   
   - label: ":lint-remover: Cleanup"
     commands: 
-      - "rm -f /buildkite/data/key.json"
+      - "rm -f /buildkite/data/gar.json"
+      - "rm -f /buildkite/data/gae.json"
       - gcloud auth revoke artifact-registry-handler@ascendant-bloom-362409.iam.gserviceaccount.com
